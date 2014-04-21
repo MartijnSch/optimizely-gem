@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    Optimizely (1.0.0)
+
+GEM
+  remote: http://www.rubygems.org/
+  specs:
+    json (1.8.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  Optimizely!
+  bundler
+  json
