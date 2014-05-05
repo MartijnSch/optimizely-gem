@@ -32,6 +32,18 @@ module Optimizely
 			@projects
 		end
 
+    # Returns the details for a specific project.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  project = optimizely.project(12345) # Look up the project.
+    #
+		def project(id)
+			raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve the project." if id.nil?
+			@project = self.get("projects/#{id}")
+			@project
+		end
+
     # Returns the list of experiments for a specified project.
     #
     # == Usage
@@ -39,9 +51,21 @@ module Optimizely
     #  experiments = optimizely.experiments(12345) # Look up all experiments for a project.
     #
 		def experiments(project_id)
-			raise OptimizelyError::NoProjectID, "A Project ID required to retrieve experiments." if project_id.nil?
+			raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve experiments." if project_id.nil?
 			@experiments = self.get("projects/#{project_id}/experiments") if @experiments.nil?
 			@experiments
+		end
+
+    # Returns the details for a specific experiment.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  experiment = optimizely.experiment(12345) # Look up the experiment.
+    #
+		def experiment(id)
+			raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve the experiment." if id.nil?
+			@experiment = self.get("experiments/#{id}")
+			@experiment
 		end
 
     # Returns the list of variations for a specified experiment.
@@ -51,9 +75,21 @@ module Optimizely
     #  variations = optimizely.variations(12345) # Look up all variations for an experiment.
     #
 		def variations(experiment_id)
-			raise OptimizelyError::NoExperimentID, "An Experiment ID required to retrieve variations." if experiment_id.nil?
+			raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve variations." if experiment_id.nil?
 			@variations = self.get("projects/#{experiment_id}/variations") if @variations.nil?
 			@experiments
+		end
+
+    # Returns the details for a specific variation.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  variation = optimizely.variation(12345) # Look up the variation.
+    #
+		def variation(id)
+			raise OptimizelyError::NoVariationID, "A Variation ID is required to retrieve the variation." if id.nil?
+			@variation = self.get("variations/#{id}")
+			@variation
 		end
 
     # Returns the list of audiences for a specified project.
@@ -63,11 +99,24 @@ module Optimizely
     #  audiences = optimizely.audiences(12345) # Look up all audiences for a project.
     #
 		def audiences(project_id)
-			raise OptimizelyError::NoProjectID, "A Project ID required to retrieve audiences." if project_id.nil?
+			raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve audiences." if project_id.nil?
 			@audiences = self.get("projects/#{project_id}/audiences") if @audiences.nil?
 			@audiences
 		end
 
+    # Returns the details for a specific audience.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  audience = optimizely.audience(12345) # Look up the audience.
+    #
+		def audience(id)
+			raise OptimizelyError::NoAudienceID, "An Audience ID is required to retrieve the audience." if id.nil?
+			@audience = self.get("audiences/#{id}")
+			@audience
+		end
+
+		# Return the parsed JSON data for a request that is done to the Optimizely REST API.
 	  def get(url)
 	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
 	  	https    = Net::HTTP.new(uri.host, uri.port)

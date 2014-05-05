@@ -29,27 +29,43 @@ Don't forget to bundle install:
 	Retrieve all projects:
 		projects = optimizely.projects
 
+	Retrieve a specific project:
+		project = optimizely.project(12345)
+
 ## Experiments
 	
 	Retrieve all experiments for a project:
 		experiments = optimizely.experiments(12345)
+
+	Retrieve a specific experiment:
+		experiment = optimizely.experiment(12345)
 
 ## Variations
 
 	Retrieve all variations for an experiment:
 		variations = optimizely.variations(12345)
 
+	Retrieve a specific variation:
+		variation = optimizely.variation(12345)
+
 ## Audiences
 
 	Retrieve all audiences for an project:
 		audiences = optimizely.audiences(12345)
 
+	Retrieve a specific audience:
+		audience = optimizely.audience(12345)
+
 # Information
 
 ### Changelog
 
+#### 1.1
+* Fix some typos in the errors for having no variable in a function and added extra documentation.
+* Add support for reading specific projects, experiments, variations and audiences.
+
 #### 1.0
-* Add all basic features for the Optimizely Experiment API.
+* Add all basic features for the Optimizely Experiment API for listing projects, experiments, variations and audiences.
 
 ### Bug reports
 
