@@ -26,6 +26,8 @@ Don't forget to bundle install:
 
 ## Projects
 
+The fields that are available for a project: project_name, project_status, id and account_id.
+
 	Retrieve all projects:
 		projects = optimizely.projects
 
@@ -33,6 +35,8 @@ Don't forget to bundle install:
 		project = optimizely.project(12345)
 
 ## Experiments
+
+The fields that are available for an experiment: id, project_id, variation_ids, edit_url and status.
 	
 	Retrieve all experiments for a project:
 		experiments = optimizely.experiments(12345)
@@ -42,6 +46,8 @@ Don't forget to bundle install:
 
 ## Variations
 
+The fields that are available for an experiment: is_paused, description, weight, created, variation_id, section_id, js_component, experiment_id, project_id and id.
+
 	Retrieve all variations for an experiment:
 		variations = optimizely.variations(12345)
 
@@ -49,6 +55,8 @@ Don't forget to bundle install:
 		variation = optimizely.variation(12345)
 
 ## Audiences
+
+The fields that are available for an experiment: id, name, project_id and description.
 
 	Retrieve all audiences for an project:
 		audiences = optimizely.audiences(12345)
