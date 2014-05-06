@@ -1,17 +1,19 @@
 PATH
   remote: .
   specs:
-    Optimizely (1.0.0)
+    optimizely (1.1.2)
 
 GEM
   remote: http://www.rubygems.org/
   specs:
     json (1.8.1)
+    rake (10.3.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  Optimizely!
   bundler
   json
+  optimizely!
+  rake

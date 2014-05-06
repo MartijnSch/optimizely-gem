@@ -46,7 +46,7 @@ The fields that are available for an experiment: id, project_id, variation_ids, 
 
 ## Variations
 
-The fields that are available for an experiment: is_paused, description, weight, created, variation_id, section_id, js_component, experiment_id, project_id and id.
+The fields that are available for a varation: is_paused, description, weight, created, variation_id, section_id, js_component, experiment_id, project_id and id.
 
 	Retrieve all variations for an experiment:
 		variations = optimizely.variations(12345)
@@ -56,7 +56,7 @@ The fields that are available for an experiment: is_paused, description, weight,
 
 ## Audiences
 
-The fields that are available for an experiment: id, name, project_id and description.
+The fields that are available for an audience: id, name, project_id and description.
 
 	Retrieve all audiences for an project:
 		audiences = optimizely.audiences(12345)
@@ -67,6 +67,9 @@ The fields that are available for an experiment: id, name, project_id and descri
 # Information
 
 ### Changelog
+
+#### 1.1.2
+* Write tests to check what happens if data is not available.
 
 #### 1.1.1
 * Return a hash object for the data you've just requested.

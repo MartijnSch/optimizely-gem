@@ -8,7 +8,7 @@ module Optimizely
     	@is_paused = json['is_paused']
 			@description = json['description']
 			@weight = json['weight']
-			@created = json['created']
+			@created = DateTime.parse(json['created'])
 			@variation_id = json['variation_id']
 			@section_id = json['section_id']
 			@js_component = json['js_component']
