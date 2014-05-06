@@ -60,6 +60,9 @@ Don't forget to bundle install:
 
 ### Changelog
 
+#### 1.1.1
+* Return a hash object for the data you've just requested.
+
 #### 1.1
 * Fix some typos in the errors for having no variable in a function and added extra documentation.
 * Add support for reading specific projects, experiments, variations and audiences.

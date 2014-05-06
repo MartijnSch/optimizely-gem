@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For testing when no gem is installed
+$:.unshift File.dirname(__FILE__) # For testing when no gem is installed.
 
 require "net/http"
 require "net/https"
