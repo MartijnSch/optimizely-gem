@@ -68,6 +68,9 @@ The fields that are available for an audience: id, name, project_id and descript
 
 ### Changelog
 
+#### 1.2.0
+* Provide users with a method to delete audiences, experiments, variations and projects.
+
 #### 1.1.3
 * Add methods for put, post and delete requests.
 * Refactor the way we check response codes to make it available to the put, post and delete methods.

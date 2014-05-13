@@ -3,7 +3,7 @@ module Optimizely
 
 		BASE_URL = "https://www.optimizelyapis.com/experiment/v1/"
 
-		attr_accessor :id, :method
+		attr_accessor :url
 
 		# Initialize Optimizely using an API token.
 		#
@@ -44,10 +44,11 @@ module Optimizely
     #  project = optimizely.project(12345) # Look up the project.
     #
 		def project(id)
+			@url = "projects/#{id}"
 			raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve the project." if id.nil?
 
 			if @project.nil?
-				response = self.get("projects/#{id}")
+				response = self.get(@url)
 				@project = Project.new(response)
 			end
 			@project
@@ -76,10 +77,11 @@ module Optimizely
     #  experiment = optimizely.experiment(12345) # Look up the experiment.
     #
 		def experiment(id)
+			@url = "experiments/#{id}"
 			raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve the experiment." if id.nil?
 
 			if @experiment.nil?
-				response = self.get("experiments/#{id}")
+				response = self.get(@url)
 				@experiment = Experiment.new(response)
 			end
 			@experiment
@@ -108,10 +110,11 @@ module Optimizely
     #  variation = optimizely.variation(12345) # Look up the variation.
     #
 		def variation(id)
+			@url = "variations/#{id}"
 			raise OptimizelyError::NoVariationID, "A Variation ID is required to retrieve the variation." if id.nil?
 
 			if @variation.nil?
-				response = self.get("variations/#{id}")
+				response = self.get(@url)
 				@variation = Variation.new(response)
 			end
 			@variation
@@ -140,10 +143,11 @@ module Optimizely
     #  audience = optimizely.audience(12345) # Look up the audience.
     #
 		def audience(id)
+			@url = "audiences/#{id}"
 			raise OptimizelyError::NoAudienceID, "An Audience ID is required to retrieve the audience." if id.nil?
 
 			if @audience.nil?
-				response = self.get("audiences/#{id}")
+				response = self.get(@url)
 				@audience = Audience.new(response)
 			end
 			@audience
@@ -161,13 +165,13 @@ module Optimizely
 
 	    # Response code error checking
       if response.code != '200'
-        check_response(response.code)
+        check_response(response.code, response.body)
       else
 		  	parse_json(response.body)
 		  end
 	  end
 
-	  def post()
+	  def post
 	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
 	  	https    = Net::HTTP.new(uri.host, uri.port)
 	  	https.read_timeout = @options[:timeout] if @options[:timeout]
@@ -177,10 +181,10 @@ module Optimizely
 	    response = https.request(request)
 
 	    # Response code error checking
-      check_response(response.code) if response.code != '201'
+      check_response(response.code, response.body) if response.code != '201'
 	  end
 
-	  def put()
+	  def put
 	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
 	  	https    = Net::HTTP.new(uri.host, uri.port)
 	  	https.read_timeout = @options[:timeout] if @options[:timeout]
@@ -190,11 +194,11 @@ module Optimizely
 	    response = https.request(request)
 
 	    # Response code error checking
-      check_response(response.code) if response.code != '202'
+      check_response(response.code, response.body) if response.code != '202'
 	  end
 
-	  def delete()
-	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
+	  def delete
+	  	uri 		 = URI.parse("#{BASE_URL}#{@url}")
 	  	https    = Net::HTTP.new(uri.host, uri.port)
 	  	https.read_timeout = @options[:timeout] if @options[:timeout]
 	  	https.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -203,7 +207,7 @@ module Optimizely
 	    response = https.request(request)
 
 	    # Response code error checking
-      check_response(response.code, response.body) if response.code != '203'
+      check_response(response.code, response.body) if response.code != '204'
 	  end
 
 	  def check_response(code, body)
@@ -217,7 +221,7 @@ module Optimizely
       when '404'
       	raise OptimizelyError::NotFound, body + "The id used in the request was inaccurate or you didn't have permission to view/edit it (status code: #{code})."
       else
-        raise OptimizelyError::UnknownError, body + "(status code: #{code})."
+        raise OptimizelyError::UnknownError, body + " (status code: #{code})."
       end
 	  end
 
