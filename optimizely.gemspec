@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.author           = "Martijn Scheijbeler"
   s.email            = "martijn@marusem.com"
   s.homepage         = "https://github.com/martijnsch/optimizely-gem/"
-  s.summary          = %q{The Optimizely Experiment API lets you create and manage Optimizely projects and the experiments inside of them.}
-  s.description      = %q{A Ruby gem to communicate with the Optimizely Experiments API, it lets you create and manage Optimizely projects and the experiments inside of them.}
+  s.summary          = %q{The Optimizely Experiment API lets you create and manage Optimizely projects and experiments.}
+  s.description      = %q{A Ruby gem to communicate with the Optimizely Experiments API, it lets you create and manage Optimizely projects and experiments.}
 
   s.files            = `git ls-files`.split("\n")
   s.test_files       = `git ls-files -- {test,spec,features}/*`.split("\n")

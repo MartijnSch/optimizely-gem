@@ -3,6 +3,8 @@ module Optimizely
 
 		BASE_URL = "https://www.optimizelyapis.com/experiment/v1/"
 
+		attr_accessor :id, :method
+
 		# Initialize Optimizely using an API token.
 		#
 		# == Options:
@@ -159,33 +161,64 @@ module Optimizely
 
 	    # Response code error checking
       if response.code != '200'
-        case response.code
-        when '400'
-          raise OptimizelyError::BadRequest, response.body + "Your request was not sent in valid JSON. (status code: #{response.code})."
-        when '401'
-          raise OptimizelyError::Unauthorized, "Your API token was missing or included in the body rather than the header (status code: #{response.code})."
-        when '403'
-          raise OptimizelyError::Forbidden, response.body + "You provided an API token but it was invalid or revoked, or if you don't have read/ write access to the entity you're trying to view/edit (status code: #{response.code})."
-        when '404'
-        	raise OptimizelyError::NotFound, response.body + "The id used in the request was inaccurate or you didn't have permission to view/edit it (status code: #{response.code})."
-        else
-          raise OptimizelyError::UnknownError, response.body + "(status code: #{response.code})."
-        end
+        check_response(response.code)
       else
 		  	parse_json(response.body)
 		  end
 	  end
 
 	  def post()
+	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
+	  	https    = Net::HTTP.new(uri.host, uri.port)
+	  	https.read_timeout = @options[:timeout] if @options[:timeout]
+	  	https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+	    https.use_ssl = true
+	    request  = Net::HTTP::Post.new(uri.request_uri, @headers)
+	    response = https.request(request)
 
+	    # Response code error checking
+      check_response(response.code) if response.code != '201'
 	  end
 
 	  def put()
+	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
+	  	https    = Net::HTTP.new(uri.host, uri.port)
+	  	https.read_timeout = @options[:timeout] if @options[:timeout]
+	  	https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+	    https.use_ssl = true
+	    request  = Net::HTTP::Put.new(uri.request_uri, @headers)
+	    response = https.request(request)
 
+	    # Response code error checking
+      check_response(response.code) if response.code != '202'
 	  end
 
 	  def delete()
+	  	uri 		 = URI.parse("#{BASE_URL}#{url}/")
+	  	https    = Net::HTTP.new(uri.host, uri.port)
+	  	https.read_timeout = @options[:timeout] if @options[:timeout]
+	  	https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+	    https.use_ssl = true
+	    request  = Net::HTTP::Delete.new(uri.request_uri, @headers)
+	    response = https.request(request)
 
+	    # Response code error checking
+      check_response(response.code, response.body) if response.code != '203'
+	  end
+
+	  def check_response(code, body)
+	  	case code
+      when '400'
+        raise OptimizelyError::BadRequest, body + "Your request was not sent in valid JSON. (status code: #{code})."
+      when '401'
+        raise OptimizelyError::Unauthorized, "Your API token was missing or included in the body rather than the header (status code: #{code})."
+      when '403'
+        raise OptimizelyError::Forbidden, body + "You provided an API token but it was invalid or revoked, or if you don't have read/ write access to the entity you're trying to view/edit (status code: #{code})."
+      when '404'
+      	raise OptimizelyError::NotFound, body + "The id used in the request was inaccurate or you didn't have permission to view/edit it (status code: #{code})."
+      else
+        raise OptimizelyError::UnknownError, body + "(status code: #{code})."
+      end
 	  end
 
 

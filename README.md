@@ -2,7 +2,7 @@ Optimizely
 ===========
 
 The unofficial (basic) Ruby gem to communicate with the Optimizely Experiment API (http://developers.optimizely.com/rest/).
-The Experiment API lets you create and manage Optimizely projects and the experiments inside of them.
+The Experiment API lets you create and manage Optimizely projects and experiments.
 
 To start using the Optimizely Experiment API you need an API Token, you can request one via: developers@optimizely.com
 
@@ -67,6 +67,10 @@ The fields that are available for an audience: id, name, project_id and descript
 # Information
 
 ### Changelog
+
+#### 1.1.3
+* Add methods for put, post and delete requests.
+* Refactor the way we check response codes to make it available to the put, post and delete methods.
 
 #### 1.1.2
 * Write tests to check what happens if data is not available.
