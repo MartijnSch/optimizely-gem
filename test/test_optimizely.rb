@@ -66,4 +66,11 @@ class OptimizelyTest < Test::Unit::TestCase
       optimizely.projects
     end
   end
+
+  def test_delete_no_id
+    optimizely = Optimizely.new({ api_token: '1234567890:xxxxx' })
+    assert_raise OptimizelyError::NoId do
+      optimizely.delete
+    end
+  end
 end

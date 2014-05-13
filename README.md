@@ -34,6 +34,10 @@ The fields that are available for a project: project_name, project_status, id an
 	Retrieve a specific project:
 		project = optimizely.project(12345)
 
+	Delete a project, you need to retrieve the project first:
+		project = optimizely.project(12345)
+		optimizely.delete
+
 ## Experiments
 
 The fields that are available for an experiment: id, project_id, variation_ids, edit_url and status.
@@ -43,6 +47,10 @@ The fields that are available for an experiment: id, project_id, variation_ids, 
 
 	Retrieve a specific experiment:
 		experiment = optimizely.experiment(12345)
+
+	Delete an experiment, you need to retrieve the experiment first:
+		experiment = optimizely.experiment(12345)
+		optimizely.delete
 
 ## Variations
 
@@ -54,6 +62,10 @@ The fields that are available for a varation: is_paused, description, weight, cr
 	Retrieve a specific variation:
 		variation = optimizely.variation(12345)
 
+	Delete a variation, you need to retrieve the variation first:
+		variation = optimizely.variation(12345)
+		optimizely.delete
+
 ## Audiences
 
 The fields that are available for an audience: id, name, project_id and description.
@@ -63,6 +75,10 @@ The fields that are available for an audience: id, name, project_id and descript
 
 	Retrieve a specific audience:
 		audience = optimizely.audience(12345)
+
+	Delete an audience, you need to retrieve the audience first:
+		audience = optimizely.audience(12345)
+		optimizely.delete
 
 # Information
 

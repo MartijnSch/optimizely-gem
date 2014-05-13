@@ -14,4 +14,5 @@ module OptimizelyError
 	class NoExperimentID < StandardError; end;
 	class NoVariationID < StandardError; end;
 	class NoAudienceID < StandardError; end;
+	class NoId < StandardError; end;
 end

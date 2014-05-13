@@ -198,6 +198,8 @@ module Optimizely
 	  end
 
 	  def delete
+	  	raise OptimizelyError::NoId, "An ID is required to delete data." if @url.nil?
+
 	  	uri 		 = URI.parse("#{BASE_URL}#{@url}")
 	  	https    = Net::HTTP.new(uri.host, uri.port)
 	  	https.read_timeout = @options[:timeout] if @options[:timeout]
