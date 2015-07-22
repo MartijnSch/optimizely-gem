@@ -17,5 +17,11 @@ Gem::Specification.new do |s|
   s.executables      = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths    = ["lib"]
   s.extra_rdoc_files = ["README.md"]
-  s.add_development_dependency 'rake'
+
+  s.add_runtime_dependency 'json', '~> 1.8.3'
+
+  s.add_development_dependency 'bundler', '~> 1.10.6'
+  s.add_development_dependency 'rake', '~> 10.4.2'
+  s.add_development_dependency 'test-unit', '~> 3.1.2'
+  s.add_development_dependency 'pry', '~> 0.10.1'
 end
