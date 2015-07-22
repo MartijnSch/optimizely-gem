@@ -97,7 +97,7 @@ module Optimizely
       raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve variations." if experiment_id.nil?
 
       if @variations.nil?
-        response = self.get("projects/#{experiment_id}/variations")
+        response = self.get("experiments/#{experiment_id}/variations")
         @variations = response.collect { |variation_json| Variation.new(variation_json) }
       end
       @variations
