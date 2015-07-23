@@ -47,11 +47,8 @@ module Optimizely
       @url = "projects/#{id}"
       raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve the project." if id.nil?
 
-      if @project.nil?
-        response = self.get(@url)
-        @project = Project.new(response)
-      end
-      @project
+      response = self.get(@url)
+      Project.new(response)
     end
 
     # Returns the list of experiments for a specified project.
@@ -63,11 +60,8 @@ module Optimizely
     def experiments(project_id)
       raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve experiments." if project_id.nil?
 
-      if @experiments.nil?
-        response = self.get("projects/#{project_id}/experiments")
-        @experiments = response.collect { |response_json| Experiment.new(response_json) }
-      end
-      @experiments
+      response = self.get("projects/#{project_id}/experiments")
+      response.collect { |response_json| Experiment.new(response_json) }
     end
 
     # Returns the details for a specific experiment.
@@ -80,11 +74,8 @@ module Optimizely
       @url = "experiments/#{id}"
       raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve the experiment." if id.nil?
 
-      if @experiment.nil?
-        response = self.get(@url)
-        @experiment = Experiment.new(response)
-      end
-      @experiment
+      response = self.get(@url)
+      Experiment.new(response)
     end
 
     # Returns the list of variations for a specified experiment.
@@ -96,11 +87,8 @@ module Optimizely
     def variations(experiment_id)
       raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve variations." if experiment_id.nil?
 
-      if @variations.nil?
-        response = self.get("experiments/#{experiment_id}/variations")
-        @variations = response.collect { |variation_json| Variation.new(variation_json) }
-      end
-      @variations
+      response = self.get("experiments/#{experiment_id}/variations")
+      response.collect { |variation_json| Variation.new(variation_json) }
     end
 
     # Returns the details for a specific variation.
@@ -113,11 +101,8 @@ module Optimizely
       @url = "variations/#{id}"
       raise OptimizelyError::NoVariationID, "A Variation ID is required to retrieve the variation." if id.nil?
 
-      if @variation.nil?
-        response = self.get(@url)
-        @variation = Variation.new(response)
-      end
-      @variation
+      response = self.get(@url)
+      Variation.new(response)
     end
 
     # Returns the list of audiences for a specified project.
@@ -129,11 +114,8 @@ module Optimizely
     def audiences(project_id)
       raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve audiences." if project_id.nil?
 
-      if @audiences.nil?
-        response = self.get("projects/#{project_id}/audiences")
-        @audiences = response.collect { |audience_json| Audience.new(audience_json) }
-      end
-      @audiences
+      response = self.get("projects/#{project_id}/audiences")
+      response.collect { |audience_json| Audience.new(audience_json) }
     end
 
     # Returns the details for a specific audience.
@@ -146,11 +128,8 @@ module Optimizely
       @url = "audiences/#{id}"
       raise OptimizelyError::NoAudienceID, "An Audience ID is required to retrieve the audience." if id.nil?
 
-      if @audience.nil?
-        response = self.get(@url)
-        @audience = Audience.new(response)
-      end
-      @audience
+      response = self.get(@url)
+      Audience.new(response)
     end
 
     # Return the parsed JSON data for a request that is done to the Optimizely REST API.
