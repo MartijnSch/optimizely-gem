@@ -11,6 +11,7 @@ require "optimizely/engine"
 require "optimizely/exceptions"
 require "optimizely/experiment"
 require "optimizely/project"
+require "optimizely/stat"
 require "optimizely/variation"
 require "optimizely/version"
 

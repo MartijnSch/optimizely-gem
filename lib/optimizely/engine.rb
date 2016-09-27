@@ -78,6 +78,20 @@ module Optimizely
       Experiment.new(response)
     end
 
+    # Returns the stats for a specific experiment.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  stats = optimizely.stats(12345) # Look up the stats with the specific experiment.
+    #
+    def stats(experiment_id)
+      @url = "experiments/#{experiment_id}/stats"
+      raise OptimizelyError::NoExperimentID, "An Experiment ID is required to retrieve the stats." if experiment_id.nil?
+
+      response = self.get(@url)
+      response.collect { |response_json| Stat.new(response_json) }
+    end
+
     # Returns the list of variations for a specified experiment.
     #
     # == Usage
