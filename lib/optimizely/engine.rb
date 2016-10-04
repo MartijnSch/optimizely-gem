@@ -132,6 +132,33 @@ module Optimizely
       Audience.new(response)
     end
 
+    # Returns the list of dimensions for a specified project.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  dimensions = optimizely.dimensions(12345) # Look up all dimensions for a project.
+    #
+    def dimensions(project_id)
+      raise OptimizelyError::NoProjectID, "A Project ID is required to retrieve dimensions." if project_id.nil?
+
+      response = self.get("projects/#{project_id}/dimensions/")
+      response.collect { |dimension_json| Dimension.new(dimension_json) }
+    end
+
+    # Returns the details for a specific dimension.
+    #
+    # == Usage
+    #  optimizely = Optimizely.new({ api_token: 'oauth2_token' })
+    #  dimension = optimizely.dimension(12345) # Look up the dimension.
+    #
+    def dimension(id)
+      @url = "dimensions/#{id}"
+      raise OptimizelyError::NoDimensionID, "An dimension ID is required to retrieve the dimension." if id.nil?
+
+      response = self.get(@url)
+      Dimension.new(response)
+    end
+
     # Return the parsed JSON data for a request that is done to the Optimizely REST API.
     def get(url)
       uri      = URI.parse("#{BASE_URL}#{url}/")
@@ -208,8 +235,6 @@ module Optimizely
 
 
     private
-
-
     # If there is no API token or an empty API token raise an exception.
     def check_init_auth_requirements
       if @options[:api_token].nil? || @options[:api_token].empty?

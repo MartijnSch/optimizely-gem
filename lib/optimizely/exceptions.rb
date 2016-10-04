@@ -9,8 +9,9 @@ module OptimizelyError
 	class NotFound < StandardError; end;
 	class UnknownError < StandardError; end;
 
-	# Request Error
+	# Missing Data Error
 	class NoProjectID < StandardError; end;
+	class NoDimensionID < StandardError; end;
 	class NoExperimentID < StandardError; end;
 	class NoVariationID < StandardError; end;
 	class NoAudienceID < StandardError; end;
