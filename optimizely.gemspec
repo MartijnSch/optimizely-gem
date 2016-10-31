@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_paths    = ["lib"]
   s.extra_rdoc_files = ["README.md"]
 
-  s.add_runtime_dependency 'json', '~> 1.8.3'
+  s.add_runtime_dependency 'json', '>= 1.8.3'
 
   s.add_development_dependency 'bundler', '~> 1.13.6'
   s.add_development_dependency 'rake', '~> 10.4.2'
