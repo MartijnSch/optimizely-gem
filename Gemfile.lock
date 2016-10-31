@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    optimizely (1.2.1)
+    optimizely (1.2.2)
       json (~> 1.8.3)
 
 GEM
@@ -24,11 +24,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.10.6)
+  bundler (~> 1.13.6)
   optimizely!
   pry (~> 0.10.1)
   rake (~> 10.4.2)
   test-unit (~> 3.1.2)
 
 BUNDLED WITH
-   1.10.6
+   1.13.6

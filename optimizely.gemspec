@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'json', '~> 1.8.3'
 
-  s.add_development_dependency 'bundler', '~> 1.10.6'
+  s.add_development_dependency 'bundler', '~> 1.13.6'
   s.add_development_dependency 'rake', '~> 10.4.2'
   s.add_development_dependency 'test-unit', '~> 3.1.2'
   s.add_development_dependency 'pry', '~> 0.10.1'
